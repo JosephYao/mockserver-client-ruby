@@ -8,19 +8,19 @@ require_relative './enum'
 #
 module MockServer::Model
   # Enum for boolean values since Ruby does not have this by default
-  class Boolean < Enum
-    def allowed_values
-      [true, false]
-    end
-
-    def !
-      !@value
-    end
-
-    def initialize(supplied_value)
-      @value = pre_process_value(supplied_value)
-    end
-  end
+  # class Boolean < Enum
+  #   def allowed_values
+  #     [true, false]
+  #   end
+  #
+  #   def !
+  #     !@value
+  #   end
+  #
+  #   def initialize(supplied_value)
+  #     @value = pre_process_value(supplied_value)
+  #   end
+  # end
 
   # Model for times class
   class Times < Hashie::Dash
@@ -31,7 +31,7 @@ module MockServer::Model
     property :remaining_times, default: 0
     property :unlimited, default: false
 
-    coerce_key :unlimited, Boolean
+    coerce_key :unlimited, boolean
   end
 
   # DSL methods related to times
