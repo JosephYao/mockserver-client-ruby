@@ -12,11 +12,11 @@ require 'base64'
 #
 module MockServer::Model
   # Enum for HTTP methods
-  class HTTPMethod < SymbolizedEnum
-    def allowed_values
-      [:GET, :POST, :PUT, :DELETE]
-    end
-  end
+  # class HTTPMethod < SymbolizedEnum
+  #   def allowed_values
+  #     [:GET, :POST, :PUT, :DELETE]
+  #   end
+  # end
 
   # Request model
   class Request < Hashie::Trash
@@ -24,9 +24,9 @@ module MockServer::Model
     include Hashie::Extensions::IgnoreUndeclared
     include Hashie::Extensions::Coercion
 
-    ALLOWED_METHODS = [:GET, :POST, :PUT, :DELETE]
+    # ALLOWED_METHODS = ['get', 'post', 'put', 'delete']
 
-    property :method, required: true, default: :GET
+    property :method, required: true, default: 'get'
     property :path, required: true, default: ''
     property :query_string_parameters, default: Parameters.new([])
     property :cookies, default: Cookies.new([])
@@ -37,7 +37,7 @@ module MockServer::Model
       Body.new(type: :STRING, value: body_value)
     end)
 
-    coerce_key :method, HTTPMethod
+    coerce_key :method, String
     coerce_key :path, String
     coerce_key :query_string_parameters, Parameters
     coerce_key :cookies, Cookies
